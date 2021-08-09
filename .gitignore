@@ -1,4 +1,4 @@
-APIs/https
+APIs/https/*
 package-lock.json
 node_modules
 config.js
