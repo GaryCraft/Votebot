@@ -13,13 +13,16 @@ module.exports ={
 
 	async startAPI(client){
 		const port = client.config.voteapi.port
+
 		https.createServer({
 			key: process.env['httpsprivkey'] ? process.env['httpsprivkey'].toString() : fs.readFileSync('./APIs/https/key.pem'),
 			cert: fs.readFileSync('./APIs/https/cert.pem'),
 		},app).listen(port, function(){
 			console.log(`sp VoteBot listening port ${port}...`)
 		})
-		
+
+		app.use(express.urlencoded({ extended: true }));
+
 		app.get('/', function(req, res) {
 			console.log('Vote API ping received');
 			res.send('This is SpaceProject\'s API for Votes ');
@@ -28,7 +31,7 @@ module.exports ={
 		/*app.post('/topgg',topwh.listener(vote=>{
 
 		}))*/
-		app.use(express.urlencoded({ extended: true }));
+		
 
 		app.post('/topgg',(req, res)=>{
 			if(!req.headers.password){
@@ -36,8 +39,11 @@ module.exports ={
 			}
 			console.log(req.body)
 			console.log(req.data)
-			const output = req.query ? req.query : JSON.parse(req.body);
+			const output = req.query.type ? req.query : JSON.parse(req.body);
 			const userid = output.user;
+			if(!userid) return res.status(400).json({ body:req.body, err:true, code:403, message:'Invalid userid !' });
+			console.log('Vote received on /topgg');
+			return res.status(200).json({ body:req.body ? req.body : 'false', ok:true, code:200, message:'Success' });
 		})
 	}
 }

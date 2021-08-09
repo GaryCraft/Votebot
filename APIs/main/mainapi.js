@@ -1,6 +1,6 @@
 const fs = require('fs')
 const express = require('express');
-const http = require('http');
+const https = require('https');
 //const { Webhook } = require('@top-gg/sdk')
 
 
@@ -13,11 +13,11 @@ module.exports ={
 
 	async startAPI(client){
 		const port = client.config.mainapi.port
-		http.createServer({
-			/*key: process.env['httpsprivkey'].toString(),
-			cert: fs.readFileSync('./APIs/https/cert.pem'),*/
+		https.createServer({
+			key: process.env['httpsprivkey'] ? process.env['httpsprivkey'].toString() : fs.readFileSync('./APIs/https/key.pem'),
+			cert: fs.readFileSync('./APIs/https/cert.pem'),
 		},app).listen(port, function(){
-			console.log(`sp MainAPI listening port ${port}...`)
+			console.log(`sp VoteBot listening port ${port}...`)
 		})
 		
 		app.get('/', function(req, res) {
