@@ -1,4 +1,5 @@
 APIs/https/*
+APIs/https/key.pem
 package-lock.json
 node_modules
 config.js
