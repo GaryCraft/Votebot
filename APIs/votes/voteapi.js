@@ -41,7 +41,6 @@ module.exports ={
 				return res.status(403).json({ body:req.body, err:true, code:403, message:'Invalid password !' });
 			}
 			console.log(req.body)
-			console.log(req.data)
 			//console.log(req)
 
 			const output = req.body;
