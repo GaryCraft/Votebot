@@ -44,7 +44,7 @@ module.exports ={
 			console.log(req.data)
 			//console.log(req)
 
-			const output = req.query ? req.query : JSON.parse(req.body);
+			const output = req.body;
 			const userid = output.user;
 			if(!userid) return res.status(400).json({ body:req.body, err:true, code:403, message:'Invalid userid !' });
 			console.log('Vote received on /topgg');
