@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Collection, Client, Intents } = require('discord.js');
+require('dotenv').config()
 
 const client = new Client({ disableMentions: 'everyone',
 	intents: [
