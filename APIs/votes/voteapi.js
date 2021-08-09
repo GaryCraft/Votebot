@@ -1,5 +1,6 @@
 const fs = require('fs')
 const express = require('express');
+const bodyParser = require("body-parser")
 const https = require('https');
 //const { Webhook } = require('@top-gg/sdk')
 
@@ -21,7 +22,9 @@ module.exports ={
 			console.log(`sp VoteBot listening port ${port}...`)
 		})
 
-		app.use(express.urlencoded({ extended: true }));
+		app.use(bodyParser.json()); // this will parse Content-Type: application/json
+		app.use(bodyParser.urlencoded({ extended: true })); // this will parse Content-Type:  application/x-www-form-urlencoded
+
 
 		app.get('/', function(req, res) {
 			console.log('Vote API ping received');
@@ -40,7 +43,7 @@ module.exports ={
 			console.log(req.body)
 			console.log(req.data)
 			console.log(req)
-			
+
 			const output = req.query ? req.query : JSON.parse(req.body);
 			const userid = output.user;
 			if(!userid) return res.status(400).json({ body:req.body, err:true, code:403, message:'Invalid userid !' });
