@@ -1,0 +1,12 @@
+module.exports = {
+	voteapi:{
+		port:'8443'
+	},
+	mainapi:{
+		port:'443'
+	},
+	discord:{
+		prefix:'v!',
+		activity:'Wait votes'
+	}
+};
